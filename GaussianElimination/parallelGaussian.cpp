@@ -262,10 +262,10 @@ return;
 int main()
 {
 int q;
-cout<<"Enter the size-parameter (q) for the matrix with size [ 2^q X 2^q ]"; cin>>q;
-assert(q>=0); //q has to be a non-negative integer
+cout<<"Enter the size-parameter (N) for the matrix with size [ N X N ]"; cin>>q;
+//assert(q&(q-1) == 0); //q has to be a non-negative integer
 
-N = (1<<q); 
+N = q;  //(1<<q); 
 initializeMatrix(N);
 
 cout<<endl<<"Input matrix of size "<<N<<" X "<<N<<endl;
