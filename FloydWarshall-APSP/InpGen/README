@@ -1,0 +1,1 @@
+This is a simple C++ program that would help in generating the inputFile for APSP-Algorithm. The generated input will be of size N*N where N is strictly a power of 2
