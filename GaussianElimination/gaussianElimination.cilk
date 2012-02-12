@@ -160,16 +160,21 @@ if(1 == X.getSize() ) //This means a 1*1 matrix
 funcA(X.get11(), U.get11(), V.get11(), W.get11());
 
 // <parallel>
-	funcB(X.get12(), U.get11(), V.get12(), W.get11());
-	funcC(X.get21(), U.get21(), V.get11(), W.get11()); 	
+	cilk_spawn funcB(X.get12(), U.get11(), V.get12(), W.get11());
+		   funcC(X.get21(), U.get21(), V.get11(), W.get11()); 	
+	cilk_sync;
+
 //</parallel>
 	
-	funcD(X.get22(), U.get21(), V.get12(), W.get11());
-	funcA(X.get22(), U.get22(), V.get22(), W.get22()); 	
-
+	cilk_spawn funcD(X.get22(), U.get21(), V.get12(), W.get11());
+	           funcA(X.get22(), U.get22(), V.get22(), W.get22()); 	
+	cilk_sync;	
+	
 // <parallel>
-	funcB(X.get21(), U.get22(), V.get22(), W.get21());
-	funcC(X.get12(), U.get12(), V.get22(), W.get22()); 	
+	cilk_spawn funcB(X.get21(), U.get22(), V.get22(), W.get21());
+		   funcC(X.get12(), U.get12(), V.get22(), W.get22()); 	
+	cilk_sync;
+
 //</parallel>
 
 	funcD(X.get11(), U.get12(), V.get21(), W.get22());
@@ -196,23 +201,27 @@ if(1 == X.getSize() ) //This means a 1*1 matrix
         }
 
 //<parallel>
-funcB(X.get11(), U.get11(), V.get11(), W.get11() );
-funcB(X.get12(), U.get11(), V.get12(), W.get11() );
+	cilk_spawn funcB(X.get11(), U.get11(), V.get11(), W.get11() );
+		   funcB(X.get12(), U.get11(), V.get12(), W.get11() );
+	cilk_sync;
 //</parallel>
 
 //<parallel>
-funcD(X.get21(), U.get21(), V.get11(), W.get11() );
-funcD(X.get22(), U.get21(), V.get12(), W.get11() );
+	cilk_spawn funcD(X.get21(), U.get21(), V.get11(), W.get11() );
+		   funcD(X.get22(), U.get21(), V.get12(), W.get11() );
+	cilk_sync;
 //</parallel>
 
 //<parallel>
-funcB(X.get21(), U.get22(), V.get21(), W.get22() );
-funcB(X.get22(), U.get22(), V.get22(), W.get22() );
+	cilk_spawn funcB(X.get21(), U.get22(), V.get21(), W.get22() );
+		   funcB(X.get22(), U.get22(), V.get22(), W.get22() );
+	cilk_sync;
 //</parallel>
 
 //<parallel>
-funcD(X.get11(), U.get12(), V.get21(), W.get22() );
-funcD(X.get12(), U.get12(), V.get22(), W.get22() );
+	cilk_spawn funcD(X.get11(), U.get12(), V.get21(), W.get22() );
+		   funcD(X.get12(), U.get12(), V.get22(), W.get22() );
+	cilk_sync;
 //</parallel>
 
 return;
@@ -239,23 +248,27 @@ if(1 == X.getSize() ) //This means a 1*1 matrix
         }
 
 //<parallel>
-funcC(X.get11(), U.get11(), V.get11(), W.get11());
-funcC(X.get21(), U.get21(), V.get11(), W.get11());
+	cilk_spawn funcC(X.get11(), U.get11(), V.get11(), W.get11());
+		   funcC(X.get21(), U.get21(), V.get11(), W.get11());
+	cilk_sync;
 //</parallel>
 
 //<parallel>
-funcD(X.get12(), U.get11(), V.get12(), W.get11());
-funcD(X.get22(), U.get21(), V.get12(), W.get11());
+	cilk_spawn funcD(X.get12(), U.get11(), V.get12(), W.get11());
+		   funcD(X.get22(), U.get21(), V.get12(), W.get11());
+	cilk_sync;
 //</parallel>
 
 //<parallel>
-funcC(X.get12(), U.get12(), V.get22(), W.get22());
-funcC(X.get21(), U.get22(), V.get22(), W.get22());
+	cilk_spawn funcC(X.get12(), U.get12(), V.get22(), W.get22());
+		   funcC(X.get21(), U.get22(), V.get22(), W.get22());
+	cilk_sync;
 //</parallel>
 
 //<parallel>
-funcD(X.get11(), U.get12(), V.get21(), W.get22());
-funcD(X.get21(), U.get22(), V.get21(), W.get22());
+	cilk_spawn funcD(X.get11(), U.get12(), V.get21(), W.get22());
+		   funcD(X.get21(), U.get22(), V.get21(), W.get22());
+	cilk_sync;
 //</parallel>
 
 return;
@@ -283,18 +296,20 @@ if(1 == X.getSize() ) //This means a 1*1 matrix
         }
 
 //<parallel>
-funcD( X.get11(), U.get11(), V.get11(), W.get11() );
-funcD( X.get12(), U.get11(), V.get12(), W.get11() );
-funcD( X.get21(), U.get21(), V.get11(), W.get11() );
-funcD( X.get22(), U.get21(), V.get12(), W.get11() );
+	cilk_spawn funcD( X.get11(), U.get11(), V.get11(), W.get11() );
+	cilk_spawn funcD( X.get12(), U.get11(), V.get12(), W.get11() );
+	cilk_spawn funcD( X.get21(), U.get21(), V.get11(), W.get11() );
+		   funcD( X.get22(), U.get21(), V.get12(), W.get11() );
+	cilk_sync;
 //</parallel>
 
 
 //<parallel>
-funcD( X.get11(), U.get12(), V.get21(), W.get22() );
-funcD( X.get12(), U.get12(), V.get22(), W.get22() );
-funcD( X.get21(), U.get21(), V.get21(), W.get22() );
-funcD( X.get22(), U.get22(), V.get22(), W.get22() );
+	cilk_spawn funcD( X.get11(), U.get12(), V.get21(), W.get22() );
+	cilk_spawn funcD( X.get12(), U.get12(), V.get22(), W.get22() );
+	cilk_spawn funcD( X.get21(), U.get21(), V.get21(), W.get22() );
+		   funcD( X.get22(), U.get22(), V.get22(), W.get22() );
+	cilk_sync;
 //</parallel>
 
 return;
@@ -302,7 +317,7 @@ return;
 
 
 
-int main()
+int cilk_main(int argc, char* argv[])
 {
 int q;
 //cout<<"Enter the size-parameter (N) for the matrix with size [ N X N ]"; 
