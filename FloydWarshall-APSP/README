@@ -1,1 +1,4 @@
-This is a parallel implementation of FloydWarshall-APSP algorithm. 
+This folder contains serial, parallel and recursive implementations for Gaussian elimination without pivoting.
+The serial code is simple with three for-loops for i,j,k.
+The recursive code has divide and conquer approach to split the task into sub-problems (without parallelism).
+The cilk code has the same divide and conquer algorithm with good amount of parallelism using cilk-support.

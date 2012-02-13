@@ -15,7 +15,7 @@
 #include"cilkview.h"
 using namespace std;
 
-#define BASE_CASE_SIZE 64 //This means anything less than or equal to 4X4 matrix will go through serial code
+#define BASE_CASE_SIZE 1 //This means anything less than or equal to 4X4 matrix will go through serial code
 
 // These are global variables that are used in the program
 double ** Matrix = NULL; // Bad code!! Need to add a class
@@ -78,7 +78,7 @@ return;
 void updateMatrix(int i, int j, int k)
 	{
 	updateCall++;
-	if( k <= (N-2) && (k<i ) && (i<N)&&(k<j) && !updateMap[i][j][k])
+	//if( k <= (N-2) && (k<i ) && (i<N)&&(k<j) && !updateMap[i][j][k])
 		{
 
 		if(dbg) {
@@ -88,7 +88,7 @@ void updateMatrix(int i, int j, int k)
 		//Matrix[j][i] = Matrix[j][i] - (Matrix[k][i]/Matrix[k][k])*Matrix[j][k];
 		//if(false == updateMap[i][j])
 			{
-			Matrix[i][j] = Matrix[i][j] - (Matrix[i][k]*Matrix[k][j])/Matrix[k][k];
+			Matrix[i][j] = min(Matrix[i][j], Matrix[i][k] + Matrix[k][j] ); 
 			updateCount++;
 		/*	stringstream ss1; ss1<<k<<",";
 			updateMap[i][j]+=ss1.str(); */
@@ -469,7 +469,7 @@ cv.start();
 funcA(X,U,V,W); 
 
 cv.stop();
-cv.dump("PARALLEL_GAUSSIAN");
+cv.dump("PARALLEL_APSP");
 
 //cout<<" Matrix("<<N<<"X"<<N<<") was updated "<<updateCount<<" times out of "<<updateCall<<" calls...."<<endl;
 

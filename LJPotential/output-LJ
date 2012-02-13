@@ -1,0 +1,48 @@
+TACC: Setting memory limits for job 456018 to unlimited KB
+TACC: Dumping job script:
+--------------------------------------------------------------------------------
+#!/bin/bash
+
+#$ -V
+#$ -cwd
+#$ -q development
+#$ -pe 12way 12
+#$ -N LJ
+#$ -o output-$JOB_NAME
+#$ -e error-$JOB_NAME
+#$ -M jaisong87@gmail.com
+#$ -m be
+#$ -l h_rt=01:00:00
+
+export PATH=$PATH:$HOME/cilk/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/cilk/lib
+/usr/bin/time ./parallelLJ < "LJ-in.txt" 2>LJ-timeElapsed.txt
+--------------------------------------------------------------------------------
+TACC: Done.
+-2.2496
+TACC: Cleaning up after job: 456018
+TACC: Done.
+TACC: Setting memory limits for job 456046 to unlimited KB
+TACC: Dumping job script:
+--------------------------------------------------------------------------------
+#!/bin/bash
+
+#$ -V
+#$ -cwd
+#$ -q development
+#$ -pe 12way 12
+#$ -N LJ
+#$ -o output-$JOB_NAME
+#$ -e error-$JOB_NAME
+#$ -M jaisong87@gmail.com
+#$ -m be
+#$ -l h_rt=01:00:00
+
+export PATH=$PATH:$HOME/cilk/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/cilk/lib
+/usr/bin/time ./parallelLJ < "LJ-in.txt" 2>LJ-timeElapsed.txt
+--------------------------------------------------------------------------------
+TACC: Done.
+-74.2092
+TACC: Cleaning up after job: 456046
+TACC: Done.

@@ -1,0 +1,57 @@
+#include<iostream>
+#include<iomanip>
+#include<cmath>
+#include "cilkview.h"
+using namespace std;
+
+
+#include <cilk.h>
+#include <reducer_opadd.h>
+
+#define MAX 1000
+
+bool dbg = false;
+
+int cilk_main(int argc, char* argv[])
+{
+int N;
+//int Px[MAX],Px[MAX],Pz[MAX];
+double *Px,*Py,*Pz;
+
+cilk::cilkview cv;
+
+cin>>N;
+Px = new double[N]; 
+Py = new double[N]; 
+Pz = new double[N]; 
+
+for(int i=0;i<N;i++)
+	cin>>Px[i]>>Py[i]>>Pz[i];
+
+cilk::reducer_opadd<double> E;
+
+//if(dbg) cout<<fixed<<E<<endl;
+
+cv.start();
+cilk_for(int i=0;i<N;i++)
+	cilk_for(int j=0;j<N;j++)
+		{
+		if(i!=j)
+			{
+		double d = ( (Px[i]-Px[j])*(Px[i]-Px[j]) + (Py[i]-Py[j])*(Py[i]-Py[j]) + (Pz[i]-Pz[j])*(Pz[i]-Pz[j]));
+		if(dbg) cout<<" d = "<<fixed<<d<<endl;
+		double dis = sqrt(d);
+		double r = 0; 
+		if(dis!=0) r = 1.0/dis;
+		double r3 = r*r*r; 
+		double r6 = r3*r3;
+		double r12 = r6*r6;
+		E += (r12-r6);
+		//if(dbg) cout<<fixed<<r3<<" "<<fixed<<r6<<" "<<fixed<<r12<<" "<<fixed<<E<<endl;
+			}
+		}
+cout<<E.get_value()<<endl;
+cv.stop();
+cv.dump("LJ_PARALLEL_CODE");
+return 0;
+}

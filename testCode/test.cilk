@@ -1,0 +1,18 @@
+#include<iostream>
+using namespace std;
+#include"cilkview.h"
+
+int cilk_main()
+{
+cilk::cilkview cv;
+int arr[1024];
+
+cv.start();
+cilk_for(int i=0;i<1024;i++)
+	{
+		arr[i] = 0; 
+	}
+cv.stop();
+cv.dump("TEST");
+return 0;
+}

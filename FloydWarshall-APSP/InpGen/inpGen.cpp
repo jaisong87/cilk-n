@@ -1,24 +1,26 @@
 #include<iostream>
 #include<cassert>
+#include<iomanip>
 using namespace std;
-
 
 int main()
 {
-int seed = 2381947,mod = 395731, step = 7794783;
-int N, val = 0;
-
-cout<<"Enter(q) the size of the desired [2^q X 2^q] matrix:";
+int N;
 cin>>N;
-assert(N>=0);
+
+int q = N&(N-1);
+assert(q==0);
+
+int step = 489731, mod = 999, seed = 948723; //Let mod be 999 so that the graph is not very bad
 
 cout<<N<<endl;
 for(int i=1;i<=N;i++,cout<<endl)
-	for(int j=1;j<=N;j++,cout<<' ')	
+	for(int i=1;i<=N;i++)
 		{
-			val+=step;
-			val%=mod;
-			cout<<val;
+			seed+=step;
+			seed%=mod;
+			seed++;					
+			cout<<setw(10)<<setprecision(2)<<fixed<<seed;
 		}
 return 0;
 }

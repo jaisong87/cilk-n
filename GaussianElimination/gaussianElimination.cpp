@@ -15,7 +15,7 @@
 #include"cilkview.h"
 using namespace std;
 
-#define BASE_CASE_SIZE 64 //This means anything less than or equal to 4X4 matrix will go through serial code
+#define BASE_CASE_SIZE 1 //This means anything less than or equal to 4X4 matrix will go through serial code
 
 // These are global variables that are used in the program
 double ** Matrix = NULL; // Bad code!! Need to add a class
