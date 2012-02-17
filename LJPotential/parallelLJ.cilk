@@ -3,7 +3,7 @@
 #include<cmath>
 #include "cilkview.h"
 using namespace std;
-
+#include<sys/timeb.h>
 
 #include <cilk.h>
 #include <reducer_opadd.h>
@@ -18,7 +18,6 @@ int N;
 //int Px[MAX],Px[MAX],Pz[MAX];
 double *Px,*Py,*Pz;
 
-cilk::cilkview cv;
 
 cin>>N;
 Px = new double[N]; 
@@ -32,7 +31,9 @@ cilk::reducer_opadd<double> E;
 
 //if(dbg) cout<<fixed<<E<<endl;
 
-cv.start();
+timeb start, end;
+
+ftime(&start);
 cilk_for(int i=0;i<N;i++)
 	cilk_for(int j=0;j<N;j++)
 		{
@@ -50,8 +51,8 @@ cilk_for(int i=0;i<N;i++)
 		//if(dbg) cout<<fixed<<r3<<" "<<fixed<<r6<<" "<<fixed<<r12<<" "<<fixed<<E<<endl;
 			}
 		}
+ftime(&end);
+cerr<<" N is "<<N<<"Start : "<<start.time<<" "<<start.millitm<<"  End : "<<end.time<<" "<<end.millitm<<endl;
 cout<<E.get_value()<<endl;
-cv.stop();
-cv.dump("LJ_PARALLEL_CODE");
 return 0;
 }
