@@ -1,1 +1,6 @@
 This project contains some basic implementations for paralell algorithms using cilk.
+
+1)Gaussian elimination - Run GaussianElimination/gaussianElimination using the job script and the code takes input from stdin and outputs to stdout
+
+2)
+

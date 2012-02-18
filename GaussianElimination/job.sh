@@ -13,4 +13,4 @@
 
 export PATH=$PATH:$HOME/cilk/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/cilk/lib
-/usr/bin/time ./gaussianElimination -cilk_set_worker_count=1 < "ge-in.txt" 2>ge-timeElapsed.txt
+./gaussianElimination < "SampleIO/ge-in.txt"
