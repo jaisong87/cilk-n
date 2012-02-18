@@ -3,5 +3,4 @@ The serial code is simple with three for-loops for i,j,k.
 The recursive code has divide and conquer approach to split the task into sub-problems (without parallelism).
 The cilk code has the same divide and conquer algorithm with good amount of parallelism using cilk-support.
 
-
-
+APSP is the executable that could be used to test APSP-Parallel Algorithm. The program takes input from stdin and outputs to stdout
