@@ -13,4 +13,4 @@
 
 export PATH=$PATH:$HOME/cilk/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/cilk/lib
-/usr/bin/time ./parallelLJ < "LJ-in.txt" 2>LJ-timeElapsed.txt
+./parallelLJ < "LJ-in.txt" 2>LJ-timeElapsed.txt
