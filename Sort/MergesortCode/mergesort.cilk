@@ -72,7 +72,7 @@ void sample_mergesort(int *a, int begin,  int end)
 int cilk_main()
 {
 int num=0;
-string str;
+//string str;
 //getline(cin, str);
 //stringstream ss1(str);
 //ss1>>num;
@@ -81,11 +81,11 @@ cin>>num;
 int *a = new int[num];
 int count = 0;
 //while(getline(cin, str))
+while(cin>>a[count])
 { 
   //stringstream ss2(str);
   //ss2>>a[count];
   //count++;
-  cin>>a[count];
   count++;
 }
 sample_mergesort(a, 0, num-1);
