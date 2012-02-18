@@ -425,7 +425,7 @@ if(BASE_CASE_SIZE >= X.getSize() ) //This means a 1*1 matrix
 //<parallel>
 	cilk_spawn funcD( X.get11(), U.get12(), V.get21(), W.get22() );
 	cilk_spawn funcD( X.get12(), U.get12(), V.get22(), W.get22() );
-	cilk_spawn funcD( X.get21(), U.get21(), V.get21(), W.get22() );
+	cilk_spawn funcD( X.get21(), U.get22(), V.get21(), W.get22() );
 		   funcD( X.get22(), U.get22(), V.get22(), W.get22() );
 	cilk_sync;
 //</parallel>
