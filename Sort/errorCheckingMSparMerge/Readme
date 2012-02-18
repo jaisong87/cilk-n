@@ -1,0 +1,5 @@
+This is the mergesort with parallel merge.
+This program can be used to verify the output of the program.
+First run the make to obtain the executable.
+The input filename expectd is "input" and the output file would be 'parallelmergesort_op'
+You can change this preference through the job.sh file.

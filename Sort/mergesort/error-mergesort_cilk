@@ -1,0 +1,42 @@
+Statistics for mergesort_plots
+
+1) Parallelism Profile
+   Work :					 10003205376 instructions
+   Span :					 630013472 instructions
+   Burdened span :				 630013472 instructions
+   Parallelism :				 15.88
+   Burdened parallelism :			 15.88
+   Number of spawns/syncs:			 5805695
+   Average instructions / strand :		 574
+   Strands along span :				 23
+   Average instructions / strand on span :	 27391890
+   Total number of atomic instructions : 	 1048578
+   Frame count :				 23222781
+2) Speedup Estimate
+  2 procs:		 1.81 - 2.00
+  4 procs:		 3.03 - 4.00
+  8 procs:		 4.57 - 8.00
+  16 procs:		 6.14 - 15.88
+  32 procs:		 7.41 - 15.88
+
+Whole Program Statistics:
+
+Cilkview Scalability Analyzer V1.1.0, Build 8503
+1) Parallelism Profile
+   Work :					 18,795,489,815 instructions
+   Span :					 9,422,297,911 instructions
+   Burdened span :				 9,422,626,838 instructions
+   Parallelism :				 1.99
+   Burdened parallelism :			 1.99
+   Number of spawns/syncs:			 5,805,695
+   Average instructions / strand :		 1,079
+   Strands along span :				 47
+   Average instructions / strand on span :	 200,474,423
+   Total number of atomic instructions : 	 1,048,596
+   Frame count :				 23222785
+2) Speedup Estimate
+   2 processors:	 1.08 - 1.99
+   4 processors:	 1.12 - 1.99
+   8 processors:	 1.15 - 1.99
+   16 processors:	 1.16 - 1.99
+   32 processors:	 1.17 - 1.99

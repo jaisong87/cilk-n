@@ -1,0 +1,11 @@
+There are four compressed documents in the folder
+1. errorCheckingMergeSort.tar.gz This is the Ordinary mergesort implementation of mergesort without parallel merge. The contents of this folder can be used to verify that the program is working. It accepts input from stdin and gives output to stout
+
+2. errorCheckingMSparMerge.tar.gz This is the implementation of mergesort with paralle merge. This contents of the folder can be used to verity that the program is working. It accepts input from stdin and gives output to stdout.
+
+3. mergesort.tar.gz This is the implementation of mergesort used to plot the graph for inputs varying from 10^3 to 10^7. This program takes generates its own input. Hence stdin wont work
+
+4. MSparMerge.tar.gz This is the implementation of mergesort with parallel merge and is used to generate the scalability plots with inputs varying from 10^3 to 10^7. This program generates int own input. Hence stdin wont work.
+
+The plots are in the folder OrdinaryMergesort and ParallelMerge. The plots for inputs varying from 10^3 to 10^7 are given in the folder named ./OrdinaryMergesort/ALLPLOTS and ./ParallelMerge/ALLPLOTS 
+The scripts for the plots are also given in the folders.

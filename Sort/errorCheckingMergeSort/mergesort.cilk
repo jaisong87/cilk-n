@@ -1,0 +1,95 @@
+#include <iostream>
+#include <istream>
+#include <sstream>
+#include <vector>
+#include <map>
+
+
+using namespace std;
+
+void merge(int *a, int begin, int middle, int end)
+{
+  int *tmp = new int[end-begin+1];
+  int tempINC=0, FirstINC=0, SecondINC=0;
+  while(tempINC <= end-begin && FirstINC <= middle-begin && SecondINC <= end-(middle+1))
+  {
+	if (a[begin+FirstINC] < a[middle+SecondINC+1])
+		{
+			tmp[tempINC] = a[begin+FirstINC];
+			tempINC++;FirstINC++;
+		}
+	else
+		{
+			tmp[tempINC] = a[middle+SecondINC+1];
+			tempINC++;SecondINC++;
+		}
+  }
+  while(FirstINC <= middle-begin)
+	{
+		tmp[tempINC] = a[begin+FirstINC];
+		tempINC++;FirstINC++; 
+	}
+  while(SecondINC <= end-(middle+1))
+	{
+		tmp[tempINC] = a[middle+SecondINC+1];
+		tempINC++;SecondINC++;
+	}
+
+int counter=0;
+while(counter < end-begin+1)
+	{
+		a[begin+counter] = tmp[counter];
+		counter++;
+	}
+delete [] tmp;  
+}
+
+void sample_mergesort(int *a, int begin,  int end)
+{
+  if (end-begin == 0)
+	return;
+  if (end-begin == 1)
+	{
+		if (a[end] > a[begin])
+			return;
+		else
+		{
+			int tmp = a[end];
+			a[end] = a[begin];
+			a[begin] = tmp;
+		}
+		return;
+	}
+  int middle = (end - begin)/2;
+  cilk_spawn sample_mergesort(a, begin, begin+middle);
+  sample_mergesort(a, begin+middle+1, end);
+  cilk_sync;
+  merge(a, begin, begin+middle, end);
+}
+
+
+
+int cilk_main()
+{
+int num=0;
+string str;
+getline(cin, str);
+stringstream ss1(str);
+ss1>>num;
+
+int *a = new int[num];
+int count = 0;
+while(getline(cin, str))
+{ 
+  stringstream ss2(str);
+  ss2>>a[count];
+  count++;
+}
+sample_mergesort(a, 0, num-1);
+
+for(int i=0;i<num;i++)
+	cout<<a[i]<<endl;
+
+ return 0;
+}
+

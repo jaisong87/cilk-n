@@ -1,0 +1,52 @@
+cilkview: running with 12 workers
+Sorting 10 integers
+0 1 2 3 4 5 6 7 8 9 0 seconds
+Sort succeeded.
+cilkview: running with 11 workers
+Sorting 10 integers
+0 1 2 3 4 5 6 7 8 9 0 seconds
+Sort succeeded.
+cilkview: running with 10 workers
+Sorting 10 integers
+0 1 2 3 4 5 6 7 8 9 0 seconds
+Sort succeeded.
+cilkview: running with 9 workers
+Sorting 10 integers
+0 1 2 3 4 5 6 7 8 9 0 seconds
+Sort succeeded.
+cilkview: running with 8 workers
+Sorting 10 integers
+0 1 2 3 4 5 6 7 8 9 0 seconds
+Sort succeeded.
+cilkview: running with 7 workers
+Sorting 10 integers
+0 1 2 3 4 5 6 7 8 9 0 seconds
+Sort succeeded.
+cilkview: running with 6 workers
+Sorting 10 integers
+0 1 2 3 4 5 6 7 8 9 0 seconds
+Sort succeeded.
+cilkview: running with 5 workers
+Sorting 10 integers
+0 1 2 3 4 5 6 7 8 9 0 seconds
+Sort succeeded.
+cilkview: running with 4 workers
+Sorting 10 integers
+0 1 2 3 4 5 6 7 8 9 0 seconds
+Sort succeeded.
+cilkview: running with 3 workers
+Sorting 10 integers
+0 1 2 3 4 5 6 7 8 9 0 seconds
+Sort succeeded.
+cilkview: running with 2 workers
+Sorting 10 integers
+0 1 2 3 4 5 6 7 8 9 0 seconds
+Sort succeeded.
+cilkview: running with 1 workers
+Sorting 10 integers
+0 1 2 3 4 5 6 7 8 9 0 seconds
+Sort succeeded.
+cilkview: generating scalability data
+Sorting 10 integers
+0 1 2 3 4 5 6 7 8 9 0 seconds
+Sort succeeded.

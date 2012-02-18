@@ -1,0 +1,194 @@
+#include <iostream>
+#include <istream>
+#include <sstream>
+#include <vector>
+#include <map>
+
+
+using namespace std;
+
+void merge(int *a, int begin, int middle, int end)
+{
+  if (middle == -1 || middle > end)
+	return;
+  int *tmp = new int[end-begin+1];
+  int tempINC=0, FirstINC=0, SecondINC=0;
+  while(tempINC <= end-begin && FirstINC <= middle-begin && SecondINC <= end-(middle+1))
+  {
+	if (a[begin+FirstINC] < a[middle+SecondINC+1])
+		{
+			tmp[tempINC] = a[begin+FirstINC];
+			tempINC++;FirstINC++;
+		}
+	else
+		{
+			tmp[tempINC] = a[middle+SecondINC+1];
+			tempINC++;SecondINC++;
+		}
+  }
+  while(FirstINC <= middle-begin)
+	{
+		tmp[tempINC] = a[begin+FirstINC];
+		tempINC++;FirstINC++; 
+	}
+  while(SecondINC <= end-(middle+1))
+	{
+		tmp[tempINC] = a[middle+SecondINC+1];
+		tempINC++;SecondINC++;
+	}
+
+int counter=0;
+while(counter < end-begin+1)
+	{
+		a[begin+counter] = tmp[counter];
+		counter++;
+	}
+
+if (end-begin+1 > 0)
+  delete tmp;  
+}
+
+int binary_search(int *a, int first, int last, int element)
+{
+//cout<<"first="<<first<<":last="<<last<<":element="<<element<<endl;
+if (first>last)
+  cout<<"this is not right first>=last first="<<first<<"last="<<last<<endl;
+else
+  {
+    if (last == first)
+        {
+		if (element == a[first])
+			return last;
+                if (element < a[first])
+			return last-1;
+                else
+			return last;
+	}
+    int mid;
+    mid = first + (last-first)/2; 
+    if(a[mid] <= element && element <= a[mid+1])
+	{
+		return mid;
+	}
+    else
+      {
+	if (element < a[mid])
+		return binary_search(a, first, mid, element );
+	else
+		return binary_search(a, mid+1, last, element);
+      }
+     
+  }  
+}
+
+void parallel_merge(int *a, int begin, int middle, int end)
+{
+int middle_index_of_first_division = begin+(middle-begin)/2;
+int middle_element_of_first_division = a[middle_index_of_first_division];
+int pos_in_second_division = binary_search(a, middle+1, end, middle_element_of_first_division);
+
+int size_of_first_tmp = (middle_index_of_first_division+1-1)-begin + (pos_in_second_division+1) - (middle+1);//the +1-1 is to show that I am not allocating space to middle element  
+int *tmp1;
+if (size_of_first_tmp != 0)
+  {
+	tmp1 = new int[size_of_first_tmp];
+        int j=0;
+	for(int i=begin;i<=middle_index_of_first_division-1;i++,j++)
+	{
+		tmp1[j] = a[i];
+        }
+        int mid = j-1;//experiment
+	for(int i=middle+1;i<=pos_in_second_division;i++,j++)
+	{
+		tmp1[j] = a[i];
+        }
+	cilk_spawn merge(tmp1, 0, mid, size_of_first_tmp-1);
+  }
+
+int size_of_second_tmp = middle - (middle_index_of_first_division) + end - (pos_in_second_division);  
+int *tmp2;
+if (size_of_second_tmp != 0)
+  {
+	tmp2 = new int[size_of_second_tmp];
+	int j = 0;
+	for(int i=middle_index_of_first_division+1;i<=middle;i++,j++)
+	{
+		tmp2[j] = a[i];
+        }
+        int mid = j-1;//experiment
+	for(int i=pos_in_second_division+1;i<=end;i++,j++)
+	{
+		tmp2[j] = a[i];
+        }
+	merge(tmp2, 0, mid, size_of_second_tmp-1);
+  }
+cilk_sync;
+
+int j=0;
+for(int i=0; i<size_of_first_tmp;i++,j++)
+   a[begin+j] = tmp1[i];
+a[begin+j] = middle_element_of_first_division;
+j = j+1;
+for(int i=0; i< size_of_second_tmp; i++, j++)
+   a[begin+j] = tmp2[i];
+
+if (size_of_first_tmp > 0)
+  delete  tmp1;
+if (size_of_second_tmp > 0)
+  delete  tmp2;
+}
+
+
+void sample_mergesort(int *a, int begin,  int end)
+{
+  if (end-begin == 0)
+	return;
+  if (end-begin == 1)
+	{
+		if (a[end] > a[begin])
+			return;
+		else
+		{
+			int tmp = a[end];
+			a[end] = a[begin];
+			a[begin] = tmp;
+		}
+		return;
+	}
+  int middle = (end - begin)/2;
+  cilk_spawn sample_mergesort(a, begin, begin+middle);
+  sample_mergesort(a, begin+middle+1, end);
+  cilk_sync;
+  parallel_merge(a, begin, begin+middle, end);
+}
+
+
+
+int cilk_main()
+{
+int num=0;
+string str;
+getline(cin, str);
+stringstream ss1(str);
+ss1>>num;
+
+int *a = new int[num];
+int count = 0;
+while(getline(cin, str))
+{ 
+  stringstream ss2(str);
+  ss2>>a[count];
+  count++;
+}
+sample_mergesort(a, 0, num-1);
+int element;
+//cout<<"position of entered  is:"<<binary_search(a, 0, num-1, 90)<<":";
+
+
+
+for(int i=0;i<num;i++)
+	cout<<a[i]<<endl;
+
+ return 0;
+}
+

@@ -1,0 +1,42 @@
+Statistics for parallelmergesort-results
+
+1) Parallelism Profile
+   Work :					 19201845096 instructions
+   Span :					 700031043 instructions
+   Burdened span :				 700031043 instructions
+   Parallelism :				 27.43
+   Burdened parallelism :			 27.43
+   Number of spawns/syncs:			 10294407
+   Average instructions / strand :		 621
+   Strands along span :				 46
+   Average instructions / strand on span :	 15218066
+   Total number of atomic instructions : 	 2226366
+   Frame count :				 48808287
+2) Speedup Estimate
+  2 procs:		 1.88 - 2.00
+  4 procs:		 3.37 - 4.00
+  8 procs:		 5.58 - 8.00
+  16 procs:		 8.29 - 16.00
+  32 procs:		 10.95 - 27.43
+
+Whole Program Statistics:
+
+Cilkview Scalability Analyzer V1.1.0, Build 8503
+1) Parallelism Profile
+   Work :					 26,804,135,897 instructions
+   Span :					 8,302,321,844 instructions
+   Burdened span :				 8,302,955,959 instructions
+   Parallelism :				 3.23
+   Burdened parallelism :			 3.23
+   Number of spawns/syncs:			 10,294,407
+   Average instructions / strand :		 867
+   Strands along span :				 93
+   Average instructions / strand on span :	 89,272,277
+   Total number of atomic instructions : 	 2,226,384
+   Frame count :				 48808291
+2) Speedup Estimate
+   2 processors:	 1.31 - 2.00
+   4 processors:	 1.55 - 3.23
+   8 processors:	 1.71 - 3.23
+   16 processors:	 1.80 - 3.23
+   32 processors:	 1.85 - 3.23
